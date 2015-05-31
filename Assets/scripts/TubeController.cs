@@ -5,7 +5,9 @@ using System.Collections.Generic;
 public class TubeController : MonoBehaviour
 {
 	//y = -1.6
-	public GameObject[] tubes;
+	public GameObject tube;
+	public List<GameObject> grounds;
+	public GameObject ground;
 	public GameObject player;
 	public float offset;
 	List<GameObject> liveTubes;
@@ -13,35 +15,34 @@ public class TubeController : MonoBehaviour
 	void Start()
 	{
 		liveTubes = new List<GameObject>();
-		InvokeRepeating("spawnTube", 0f, 1f);
-		InvokeRepeating("DestroyTube", 2f,2f);
+		grounds = new List<GameObject> ();
+		InvokeRepeating("spawnTube", 1f, 1f);
+		InvokeRepeating("DestroyTube", 6f,2f);
+		InvokeRepeating ("SpawnGround", 1f, 3f);
+		InvokeRepeating ("DestroyGround", 8f, 6f);
 		Random.seed = 42;
 	}
 	void spawnTube()
 	{
-		int tubeGroup = Random.Range(1, 5);
-		Vector2 newPos = player.transform.position;
-		switch (tubeGroup + 1) 
-		{
-		case 1:
-			offset = -15;
-			break;
-		case 2:
-			offset = 1f;
-			break;
-		case 3:
-			offset = -9;
-			break;
-		case 4:
-			offset = -4;
-			break;
-		case 5:
-			offset = 0;
-			break;
-		}
-		newPos.y = offset;
+		int yAxi = Random.Range(17, 32);
+		Vector3 newPos = player.transform.position;
+		newPos.y = -yAxi;
 		newPos.x += 30f;
-		liveTubes.Add ( Instantiate(tubes[tubeGroup], newPos, Quaternion.identity) as GameObject);
+		newPos.z = -1;
+		liveTubes.Add ( Instantiate(tube, newPos, Quaternion.identity) as GameObject);
+	}
+	void SpawnGround()
+	{
+		Vector3 newPos = player.transform.position;
+		newPos.y = -22f;
+		newPos.x += 32f;
+		newPos.z = -3;
+		grounds.Add ( Instantiate(ground, newPos, Quaternion.identity) as GameObject);
+	}
+	void DestroyGround()
+	{
+		Destroy(grounds[0]);
+		grounds.RemoveAt(0);
 	}
 	void DestroyTube()
 	{

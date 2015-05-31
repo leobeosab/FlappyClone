@@ -6,6 +6,19 @@ public class PlayerController : MonoBehaviour
 	public float jumpSpeed = 1f;
 	public float velocity = 1f;
 	private bool canJump = true;
+	int score = 4;
+	public int Score
+	{
+		get
+		{
+			return score;
+		}
+		set
+		{
+			score = value;
+		}
+	}
+
 	Rigidbody2D rb;
 	void Start () 
 	{
@@ -28,8 +41,18 @@ public class PlayerController : MonoBehaviour
 		rb.velocity = new Vector2(velocity, jumpSpeed);
 		canJump = false;
 	}
-	void OnCollisionEnter(Collision other)
+	void OnCollisionEnter2D(Collision2D other)
 	{
 		//do a gameover
+		Debug.Log ("wat");
+		gameOver();
+	}
+	void OnTriggerEnter2D(Collider2D other)
+	{
+		Score += 1;
+	}
+	void gameOver()
+	{
+
 	}
 }
