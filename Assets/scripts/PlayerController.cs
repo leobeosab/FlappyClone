@@ -5,6 +5,7 @@ public class PlayerController : MonoBehaviour
 {
 	public float jumpSpeed = 1f;
 	public float velocity = 1f;
+	private bool gameOver;
 	private bool canJump = true;
 	int score = 0;
 	public int Score
@@ -43,14 +44,16 @@ public class PlayerController : MonoBehaviour
 	}
 	void OnCollisionEnter2D(Collision2D other)
 	{
-		gameOver();
+		if (!gameOver)
+		GameOver();
 	}
 	void OnTriggerEnter2D(Collider2D other) //triggers are placed between the TubePrefabs to add the points
 	{
 		Score += 1;
 	}
-	void gameOver()
+	void GameOver()
 	{
-
+		GameObject.Find("Canvas").GetComponent<MenuController>().GameOver();
+		gameOver = true;
 	}
 }
