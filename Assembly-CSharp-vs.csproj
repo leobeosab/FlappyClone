@@ -5,7 +5,7 @@
 	<Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
 	<ProductVersion>10.0.20506</ProductVersion>
 	<SchemaVersion>2.0</SchemaVersion>
-	<ProjectGuid>{0B7DE1E9-A479-2F75-5CE3-C68DE2A89690}</ProjectGuid>
+	<ProjectGuid>{38922955-ED95-7092-B2F3-8CDC8E42931E}</ProjectGuid>
 	<OutputType>Library</OutputType>
 	<AppDesignerFolder>Properties</AppDesignerFolder>
 	<RootNamespace></RootNamespace>
@@ -48,10 +48,11 @@
   <ItemGroup>
      <Compile Include="Assets\scripts\CameraFollowOnX.cs" />
      <Compile Include="Assets\scripts\GroundController.cs" />
+     <Compile Include="Assets\scripts\MenuController.cs" />
+     <Compile Include="Assets\scripts\PillarBottomController.cs" />
      <Compile Include="Assets\scripts\PlayerController.cs" />
+     <Compile Include="Assets\scripts\TextScoreListener1.cs" />
      <Compile Include="Assets\scripts\TubeController.cs" />
-     <Compile Include="Assets\scripts\pillatBottomController.cs" />
-     <Compile Include="Assets\scripts\textScoreListener.cs" />
      <None Include="Assets\Plugins\README.txt" />
      <None Include="Assets\Plugins\AndroidManifest.xml" />
  <Reference Include="UnityEngine.UI">
