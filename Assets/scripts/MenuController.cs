@@ -6,6 +6,8 @@ using System.Collections.Generic;
 public class MenuController : MonoBehaviour {
 
 	public List<Sprite> medals;
+	GameObject instructions;
+	GameObject gameOver;
 	PlayerController player;
 	Text highScoreText;
 	int highScore;
@@ -13,6 +15,8 @@ public class MenuController : MonoBehaviour {
 	Image medalImage;
 	void Start () 
 	{
+		instructions = GameObject.Find ("Instructions");
+		gameOver = GameObject.Find ("Game Over Object");
 		player = GameObject.Find ("Player").GetComponent<PlayerController>();
 		highScore = PlayerPrefs.GetInt ("score");
 		highScoreText = GameObject.Find ("High Score").GetComponent<Text>();
@@ -24,7 +28,7 @@ public class MenuController : MonoBehaviour {
 		});
 		medalImage = GameObject.Find ("Medal Image").GetComponent<Image>();
 	}
-	
+
 	void UpdateScore()
 	{
 		if (player.Score > highScore)
@@ -40,6 +44,7 @@ public class MenuController : MonoBehaviour {
 		{
 			medalImage.sprite = medals[2];
 		}
+
 	}
 
 	void Restart()
@@ -47,28 +52,36 @@ public class MenuController : MonoBehaviour {
 		Application.LoadLevel(0);
 	}
 
-	IEnumerator moveUp()
+	IEnumerator MoveDown(GameObject uiElement)
 	{
-
-	}
-	IEnumerator moveDown()
-	{
-		Vector2 target = new Vector2(0, 32);
-		while(Vector2.Distance(transform.position, target.position) > 0.05f)
+		float smoothing = 8f;
+		Vector2 target = new Vector2(0, 0);
+		while(Vector2.Distance(uiElement.transform.localPosition, target) > 0.05f)
 		{
-			transform.position = Vector3.Lerp(transform.position, target.position, smoothing * Time.deltaTime);
-			
+			uiElement.transform.localPosition = Vector2.Lerp(uiElement.transform.localPosition, target, smoothing * Time.deltaTime);
 			yield return null;
 		}
-		
-		print("Reached the target.");
-		
 		yield return new WaitForSeconds(3f);
-		
-		print("MyCoroutine is now finished.");
+	}
+
+	IEnumerator MoveUp(GameObject uiElement)
+	{
+		float smoothing = 8f;
+		Vector2 target = new Vector2(0, 300);
+		while(Vector2.Distance(uiElement.transform.localPosition, target) > 0.05f)
+		{
+			uiElement.transform.localPosition = Vector2.Lerp(uiElement.transform.localPosition, target, smoothing * Time.deltaTime);
+			yield return null;
+		}
+		yield return new WaitForSeconds(3f);
 	}
 	public void GameOver()
 	{
 		UpdateScore ();
+		StartCoroutine ("MoveDown", gameOver);
+	}
+	public void MoveInstructions()
+	{
+		StartCoroutine ("MoveUp", instructions);
 	}
 }
