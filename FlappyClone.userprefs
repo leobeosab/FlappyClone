@@ -1,10 +1,16 @@
 ﻿<Properties>
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\scripts\textScoreListener.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Flappy Space Ship\scripts\TerrainController.cs">
     <Files>
-      <File FileName="Assets\scripts\textScoreListener.cs" Line="1" Column="1" />
-      <File FileName="Assets\scripts\GroundController.cs" Line="1" Column="1" />
-      <File FileName="Assets\scripts\PlayerController.cs" Line="1" Column="1" />
+      <File FileName="Assets\sample\GoogleMobileAdsDemoScript.cs" Line="126" Column="41" />
+      <File FileName="..\FlappyCloneCopy\Assets\scripts\MenuController.cs" Line="1" Column="1" />
+      <File FileName="..\FlappyCloneCopy\Assets\scripts\PlayerController.cs" Line="1" Column="1" />
+      <File FileName="..\FlappyCloneCopy\Assets\scripts\GroundController.cs" Line="17" Column="1" />
+      <File FileName="Assets\Plugins\Android\GoogleMobileAdsPlugin\AndroidManifest.xml" Line="1" Column="1" />
+      <File FileName="Assets\Flappy Space Ship\scripts\AdController.cs" Line="34" Column="11" />
+      <File FileName="Assets\Flappy Space Ship\scripts\PillarBottomController.cs" Line="18" Column="1" />
+      <File FileName="Assets\Flappy Space Ship\scripts\PlayerController.cs" Line="82" Column="5" />
+      <File FileName="Assets\Flappy Space Ship\scripts\TerrainController.cs" Line="19" Column="53" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>

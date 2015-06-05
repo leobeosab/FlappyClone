@@ -75,9 +75,10 @@ public class PlayerController : MonoBehaviour
 	}
 	void GameOver()
 	{
-		GameObject.Find("Canvas").GetComponent<MenuController>().GameOver();
+		/*GameObject.Find("Canvas").GetComponent<MenuController>().GameOver();
 		source.PlayOneShot (gameOverSound, .75f);
 		terrainController.TurnOnOrOff(false);
 		gameOver = true;
+		*/
 	}
 }
