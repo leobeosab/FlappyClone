@@ -4,7 +4,7 @@ using System.Collections;
 using System.Collections.Generic;
 
 public class MenuController : MonoBehaviour {
-
+	
 	public List<Sprite> medals;
 	GameObject instructions;
 	GameObject gameOver;
@@ -23,12 +23,12 @@ public class MenuController : MonoBehaviour {
 		highScoreText.text = highScore.ToString();
 		restartButton = GameObject.Find("Restart Button").GetComponent<Button>();
 		restartButton.onClick.AddListener(() => 
-	    {
-			Restart ();
+		                                  {
+			Reset ();
 		});
 		medalImage = GameObject.Find ("Medal Image").GetComponent<Image>();
 	}
-
+	
 	void UpdateScore()
 	{
 		if (player.Score > highScore)
@@ -44,14 +44,15 @@ public class MenuController : MonoBehaviour {
 		{
 			medalImage.sprite = medals[2];
 		}
-
+		
 	}
-
-	void Restart()
+	
+	void Reset()
 	{
-		Application.LoadLevel(0);
+		Application.LoadLevel (0);
+		//Restart ();
 	}
-
+	
 	IEnumerator MoveDown(GameObject uiElement)
 	{
 		float smoothing = 8f;
@@ -61,11 +62,15 @@ public class MenuController : MonoBehaviour {
 			uiElement.transform.localPosition = Vector2.Lerp(uiElement.transform.localPosition, target, smoothing * Time.deltaTime);
 			yield return null;
 		}
-		yield return new WaitForSeconds(3f);
+		yield return new WaitForSeconds(.1f);
+		if (uiElement.Equals (instructions)) {
+			GameObject.Find ("Player").GetComponent<PlayerController>().CanInput = true;
+		}
 	}
-
+	
 	IEnumerator MoveUp(GameObject uiElement)
 	{
+		StopCoroutine ("MoveDown");
 		float smoothing = 8f;
 		Vector2 target = new Vector2(0, 300);
 		while(Vector2.Distance(uiElement.transform.localPosition, target) > 0.05f)
@@ -73,8 +78,16 @@ public class MenuController : MonoBehaviour {
 			uiElement.transform.localPosition = Vector2.Lerp(uiElement.transform.localPosition, target, smoothing * Time.deltaTime);
 			yield return null;
 		}
-		yield return new WaitForSeconds(3f);
+
 	}
+	void Restart()
+	{
+		GameObject.Find ("Background").GetComponent<TerrainController> ().Restart ();
+		GameObject.Find ("Player").GetComponent<PlayerController> ().Restart ();
+		StartCoroutine ("MoveUp", gameOver);
+		StartCoroutine ("MoveDown", instructions);
+	}
+
 	public void GameOver()
 	{
 		UpdateScore ();

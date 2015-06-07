@@ -16,7 +16,6 @@ public class TerrainController : MonoBehaviour {
 	{
 		player = GameObject.Find ("Player");
 		liveTubes = new List<GameObject>();
-		Random.seed = int.Parse(Time.deltaTime.ToString());
 	}
 	void spawnTube()
 	{
@@ -29,7 +28,10 @@ public class TerrainController : MonoBehaviour {
 	}
 	void SpawnGround() //spawn the ground where need be
 	{
-		newPos = grounds[grounds.Count - 1].transform.position;
+		if (grounds.Count == 0)
+			newPos = GameObject.Find ("Ground 1").transform.position;
+		else
+			newPos = grounds[grounds.Count - 1].transform.position;
 		newPos.y = -22f;
 		newPos.x += 48.5f;
 		newPos.z = -3;
@@ -57,9 +59,22 @@ public class TerrainController : MonoBehaviour {
 		else 
 		{
 			CancelInvoke("spawnTube");
-			CancelInvoke("spawnGround");
+			CancelInvoke("SpawnGround");
 			CancelInvoke("DestroyTube");
 			CancelInvoke("DestroyGround");
 		}
+	}
+	public void Restart()
+	{
+		foreach (GameObject g in grounds) 
+		{
+			Destroy(g);
+		}
+		foreach (GameObject t in liveTubes) {
+			Destroy(t);
+		}
+		grounds.Clear ();
+		liveTubes.Clear ();
+		TurnOnOrOff(false);
 	}
 }
